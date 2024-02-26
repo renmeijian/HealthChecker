@@ -1,0 +1,33 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: health-server
+
+health:
+  mysql:
+    enableCheck: false
+    ip: 172.30.92.61
+    port: 3306
+    database: rpa
+    user: root
+    pwd: '*&T3*1(%imk@VB'
+  redis:
+    enableCheck: false
+    ip: 172.30.92.61
+    port: 6379
+    pwd: "&r6Fe$^7%NBm"
+  s3:
+    enableCheck: false
+    ip: "172.30.92.61:9000"
+    bucketName: rpa
+    prefix: resource/
+    secretKey: "dyAwnn1eGIlxEepisVQAjHm6qzxXbF3x"
+    accessKey: "grMSBA3SXispbLaB"
+  etcd:
+    enableCheck: false
+    ip: 172.30.92.61
+    port: 22379
+
+
+
