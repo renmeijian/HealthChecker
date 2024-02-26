@@ -1,23 +1,38 @@
 # 简介
 
+**根据nacos注册中心的设计思想，开发了一个健康检查组件：HealthChecker，** 供兄弟们学习和工作使用，该组件在本人项目组研测环境运行良好。
+
 1、服务及组件运行过程中，不可避免的会出现不可用故障，除了保障高可用，还需对故障进行及时告警及恢复，避免引发全局不可用。
+
 2、该健康检查组件只需在待检查服务添加主动健康检查组件客户端依赖，即可实现该服务的健康检查及告警功能。
+
 3、对于数据库等组件，只需简单配置，即可实现中间件故障的秒级感知，而不是等客户反馈，提高故障处理速度及客户对产品的满意度。
 
-主动健康检查及告警组件分为三部分，分别是客户端、服务端、告警服务。
+
+主动健康检查及告警组件分为三部分，分别是**客户端、服务端、告警服务**。
+
+本仓库中包含了客户端、服务端全部代码，不包括告警服务，由于不用业务的告警需求不同，兄弟们可以根据自己的业务需求开发自己的告警服务，将检查结果落库，然后制定相应的告警规则和告警途径。
+
 **检查类型**
+
 **被动健康检查**：SpringBoot微服务
+
 **主动健康检查**：Mysql、redis、etcd、oss
 
 **总体流程**
+
+health组件：健康检查组件简称
+
 
 ![image](https://github.com/renmeijian/HealthChecker/assets/50255831/ca47217d-c9f2-4c28-8b3e-b591f7ecbf91)
 
 
 **代码总体介绍**
+
 待补充.......
 
 服务信息存储结构：
+
 ![image](https://github.com/renmeijian/HealthChecker/assets/50255831/16d6e2d5-7465-4a04-922b-8c83af889119)
 
 
@@ -30,13 +45,25 @@
 能检查**所有微服务**的**所有节点**健康状态，也能检查**MySql、redis、OSS、ETCD等依赖**的健康状态
 
 ## 易集成
+
 **对于微服务健康检查：只需两步**
+
 a、 在拟健康检查的项目中引入客户端依赖 
+
 ![image](https://github.com/renmeijian/HealthChecker/assets/50255831/46ac1ce7-c8c1-4359-94a2-c494abfd571a)
 
 
 2、在拟健康检查的项目中添加application.yml配置
+
 ![image](https://github.com/renmeijian/HealthChecker/assets/50255831/eb85f18e-c0b0-419d-9d62-2b02c66f5820)
+
+**对于MySql等中间件健康检查**
+
+a、在health-server开启对应中间件的健康检查功能，enableCheck为true表示开启该中间件的健康检查功能。然后配置中间件连接信息。
+
+![image](https://github.com/renmeijian/HealthChecker/assets/50255831/decf91b3-71ef-466b-a71e-1ffc756eb9e0)
+
+b、若有其他中间件需要健康检查，本组件支持扩展，
 
 ## 高性能
 
