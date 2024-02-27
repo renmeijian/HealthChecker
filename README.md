@@ -130,7 +130,7 @@ health:
 
 ##### 编写对应的健康检查处理器
 
-添加@HealthChecker注解，实现HealthCheckProcessor接口，开启一个线程进行健康检查，如下图：
+添加@HealthChecker注解，设置type值。实现HealthCheckProcessor接口，开启一个线程进行健康检查，如下图：
     
 ![image](https://github.com/renmeijian/HealthChecker/assets/50255831/d3e5d91d-b49a-446f-857b-21f563a1ea8d)
 
