@@ -86,13 +86,45 @@ health-server:
 
 #### a、在health-server开启对应中间件的健康检查功能，enableCheck为true表示开启该中间件的健康检查功能。然后配置中间件连接信息。
 
-![image](https://github.com/renmeijian/HealthChecker/assets/50255831/decf91b3-71ef-466b-a71e-1ffc756eb9e0)
+```yml
+server:
+  port: 9001
+spring:
+  application:
+    name: health-server
+
+health:
+  mysql:
+    enableCheck: false  # 是否开启mysql健康检查，true开启，false关闭
+    ip: 172.30.92.11  # mysql访问地址
+    port: 3306 # mysql访问端口
+    database: rpa # mysql数据库名称
+    user: root
+    pwd: '*&T3*1(%imk@VB'
+  redis:
+    enableCheck: false # 是否开启redis健康检查，true开启，false关闭
+    ip: 172.30.92.11
+    port: 6379
+    pwd: "&r6Fe$^7%NBm"
+  s3:
+    enableCheck: false # 是否开启s3健康检查，true开启，false关闭
+    ip: "172.30.92.11:9000"
+    bucketName: rpa
+    prefix: resource/
+    secretKey: "dyAwnn1eGIlxEepisVQAjHm6qzxXbF3x"
+    accessKey: "grMSBA3SXispbLaB"
+  etcd:
+    enableCheck: false # 是否开启etcd健康检查，true开启，false关闭
+    ip: 172.30.92.11
+    port: 22379
+```
+
 
 #### b、若有其他中间件需要健康检查，本组件支持扩展，扩展步骤如下：
 
 ##### 创建配置映射类
 
-如redis配置，添加必须的注解，添加类型（如redis）,添加redis连接信息字段，如下图：
+如redis配置：添加必须的注解，设置type值（如redis）, 添加连接信息字段，如下图：
     
 ![image](https://github.com/renmeijian/HealthChecker/assets/50255831/457799e6-65d4-4a66-9e3a-1f86a2aadd3b)
 
