@@ -36,7 +36,12 @@
 
 服务信息存储结构：
 
-![image](https://github.com/renmeijian/HealthChecker/assets/50255831/16d6e2d5-7465-4a04-922b-8c83af889119)
+```java
+    /**
+     * namespace,  serviceName : set<instance>
+     */
+    public final Map<String, Map<String, Service>> serviceMap = new ConcurrentHashMap<>();
+```
 
 
 
@@ -55,12 +60,27 @@
 
 #### a、 在拟健康检查的项目中引入客户端依赖 
 
-![image](https://github.com/renmeijian/HealthChecker/assets/50255831/46ac1ce7-c8c1-4359-94a2-c494abfd571a)
+```xml
+        <dependency>
+            <groupId>rpa</groupId>
+            <artifactId>health-client</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+```
 
 
 #### b、在拟健康检查的项目中添加application.yml配置
+配置举例：
 
-![image](https://github.com/renmeijian/HealthChecker/assets/50255831/eb85f18e-c0b0-419d-9d62-2b02c66f5820)
+```yml
+# HealthChecker服务端部署地址
+health-server:
+  info:
+    ip: 127.0.0.1
+    port: 9001
+    namespace: dev
+```
+
 
 ### 对于MySql等中间件健康检查
 
