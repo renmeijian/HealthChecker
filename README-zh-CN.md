@@ -1,3 +1,4 @@
+> [English](README.md) | 中文
 # 简介
 
 ## HealthChecker可以做什么？
