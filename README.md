@@ -13,27 +13,27 @@ It can check the health status of all instances of all services in the cluster, 
 
 3. For components such as databases, simple configuration is required to achieve second level perception of middleware failures, rather than waiting for customer feedback, improving fault handling speed and customer satisfaction with the product.
 
-主动健康检查及告警组件分为三部分，分别是**客户端、服务端、告警服务**。
+The active health check and alarm component is divided into three parts, namely ** client, server, and alarm service **.
 
-本仓库中包含了客户端、服务端全部代码，不包括告警服务，由于不用业务的告警需求不同，兄弟们可以根据自己的业务需求开发自己的告警服务，将检查结果落库，然后制定相应的告警规则和告警途径。
+This repository contains all the code for the client and server, excluding alarm services. Due to the different alarm requirements of different businesses, you can develop your own alarm services according to your own business needs, store the inspection results, and then formulate corresponding alarm rules and channels.
 
-## 检查类型
+## Type of Check
 
-**被动健康检查**：SpringBoot微服务
+**Passive health check**：SpringBoot
 
-**主动健康检查**：Mysql、redis、etcd、oss
+**Proactive health check**：Mysql、redis、etcd、oss
 
-## 总体流程
+## Overall process
 
 ![9c9710ab90b02a56033b125831c94906](https://github.com/renmeijian/HealthChecker/assets/50255831/8b6653f9-87f1-448e-a9b9-42a857068d6f)
 
 
 
-## 代码总体介绍
+## Overall Code Introduction
 
-待补充.......
+To be supplemented.......
 
-服务信息存储结构：
+Service Information Storage Structure：
 
 ```java
     /**
@@ -45,19 +45,19 @@ It can check the health status of all instances of all services in the cluster, 
 
 
 
-# 组件特点及实现
+# Component characteristics and implementation
 
-## 能力强
+## Be capable
 
-能检查集群中**所有服务**的**所有实例**健康状态，也能检查**MySql、redis、OSS、ETCD等依赖**的健康状态
+Can check the health status of all instances of all services in the cluster, as well as the health status of dependencies such as MySql, Redis, OSS, ETCD, etc
 
-## 易集成
+## Easy to integrate
 
-本组件容易集成到springboot项目中，对代码无侵入。
+This component is easy to integrate into the Spring Boot project with minimal code intrusion.
 
-### 对于微服务健康检查：只需两步
+### For microservice health check: only two steps needed
 
-#### a、 在拟健康检查的项目中引入客户端依赖 
+#### a、 Introducing client dependencies in the project of health check planning
 
 ```xml
         <dependency>
@@ -68,11 +68,12 @@ It can check the health status of all instances of all services in the cluster, 
 ```
 
 
-#### b、在拟健康检查的项目中添加application.yml配置
-配置举例：
+#### b、Add application.yml configuration to the project for health check
+
+Configuration example:
 
 ```yml
-# HealthChecker服务端部署地址
+# HealthChecker Server deployment address
 health-server:
   info:
     ip: 127.0.0.1
@@ -81,9 +82,9 @@ health-server:
 ```
 
 
-### 对于MySql等中间件健康检查
+### For middleware health checks such as MySql
 
-#### a、在health-server开启对应中间件的健康检查功能，enableCheck为true表示开启该中间件的健康检查功能。然后配置中间件连接信息。
+#### a、Enable the health check function of the corresponding middleware in the health server, where enableCheck is true to indicate that the health check function of the middleware is enabled. Then configure the middleware connection information.
 
 ```yml
 server:
@@ -94,26 +95,26 @@ spring:
 
 health:
   mysql:
-    enableCheck: false  # 是否开启mysql健康检查，true开启，false关闭
-    ip: 172.30.92.11  # mysql访问地址
-    port: 3306 # mysql访问端口
-    database: rpa # mysql数据库名称
+    enableCheck: false  # Is MySQL health check enabled? True enabled, false disabled
+    ip: 172.30.92.11  # MySQL access address
+    port: 3306 # MySQL access port
+    database: rpa # MySQL database name
     user: root
     pwd: '*&T3*1(%imk@VB'
   redis:
-    enableCheck: false # 是否开启redis健康检查，true开启，false关闭
+    enableCheck: false # Is Redis health check enabled? True enabled, false disabled
     ip: 172.30.92.11
     port: 6379
     pwd: "&r6Fe$^7%NBm"
   s3:
-    enableCheck: false # 是否开启s3健康检查，true开启，false关闭
+    enableCheck: false # Is S3 health check enabled? True enabled, false disabled
     ip: "172.30.92.11:9000"
     bucketName: rpa
     prefix: resource/
     secretKey: "dyAwnn1eGIlxEepisVQAjHm6qzxXbF3x"
     accessKey: "grMSBA3SXispbLaB"
   etcd:
-    enableCheck: false # 是否开启etcd健康检查，true开启，false关闭
+    enableCheck: false # Is the ETCD health check enabled? True enabled, false disabled
     ip: 172.30.92.11
     port: 22379
 ```
