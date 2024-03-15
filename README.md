@@ -1,4 +1,4 @@
-> [中文](README-zh-CN.md) | English
+> English | [中文](README-zh-CN.md)
 # Introduction
 
 ## What can HealthChecker do？
