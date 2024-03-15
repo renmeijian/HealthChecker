@@ -13,7 +13,7 @@ It can check the health status of all instances of all services in the cluster, 
 
 3. For components such as databases, simple configuration is required to achieve second level perception of middleware failures, rather than waiting for customer feedback, improving fault handling speed and customer satisfaction with the product.
 
-The active health check and alarm component is divided into three parts, namely ** client, server, and alarm service **.
+The active health check and alarm component is divided into three parts, namely **client, server, and alarm service**.
 
 This repository contains all the code for the client and server, excluding alarm services. Due to the different alarm requirements of different businesses, you can develop your own alarm services according to your own business needs, store the inspection results, and then formulate corresponding alarm rules and channels.
 
