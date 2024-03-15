@@ -25,7 +25,7 @@ This repository contains all the code for the client and server, excluding alarm
 
 ## Overall process
 
-![9c9710ab90b02a56033b125831c94906](https://github.com/renmeijian/HealthChecker/assets/50255831/8b6653f9-87f1-448e-a9b9-42a857068d6f)
+![eb7aa8eecb0c293dc32cbed579f20e10](https://github.com/renmeijian/HealthChecker/assets/50255831/1ba04ae2-7f95-4269-a44a-29d93ba9a2fe)
 
 
 
