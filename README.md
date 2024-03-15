@@ -120,76 +120,76 @@ health:
 ```
 
 
-#### b、若有其他中间件需要健康检查，本组件支持扩展，扩展步骤如下：
+#### b、If there are other middleware that require health checks, this component supports extension. The extension steps are as follows：
 
-##### 创建配置映射类
+##### Create configuration mapping class
 
-如redis配置：添加必须的注解，设置type值（如redis）, 添加连接信息字段，如下图：
+For Redis configuration: add necessary annotations, set type values (such as Redis), and add connection information fields, as shown in the following figure:
     
 ![image](https://github.com/renmeijian/HealthChecker/assets/50255831/457799e6-65d4-4a66-9e3a-1f86a2aadd3b)
 
-##### 编写对应的健康检查处理器
+##### Write the corresponding health check processor
 
-添加@HealthChecker注解，设置type值。实现HealthCheckProcessor接口，开启一个线程进行健康检查，如下图：
+Add @ HealthChecker annotation and set the type value. Implement the HealthCheckProcessor interface and start a thread for health checks, as shown in the following figure:
     
 ![image](https://github.com/renmeijian/HealthChecker/assets/50255831/d3e5d91d-b49a-446f-857b-21f563a1ea8d)
 
     
 
-## 高性能
+## High-performance
 
-**异步化**
+**Asynchronous**
 
-阻塞队列
+Blocking queue
 
-将服务注册的任务放入阻塞队列，采用线程池异步来完成实例更新，从而提高并发写能力。
+Put the task of service registration into a blocking queue and use thread pool stepping to complete instance updates, thereby improving concurrent writing capabilities.
 
-**线程池**
+**Thread pool**
 
-定时线程可复用
+ Timed threads can be reused
 
-**连接池**
+**Connection pool**
 
-数据库检查连接可复用
+ Database check connection reusability
 
- **双重检查锁**  
+**Double-Checked Lock**  
  
- 确保在应用程序中只有一个实例
+ Ensure that there is only one instance in the application
 
-## 低耦合
+## Low Coupling
 
-**观察者模式**
+**Observer mode**
 
-尽量减少依赖关系，使之便于维护 ，耦合度低
+Minimize dependencies as much as possible, making them easier to maintain and with low coupling
 
-## 功能内聚
+## Functional Cohesion
 
-注册处理，心跳处理，发送http请求等功能单独封装类
+Registration processing, heartbeat processing, sending HTTP requests, and other functions are separately packaged into classes
 
-## 扩展性强
+## Strong scalability
 
-**策略模式**
+**Strategy mode**
 
-根据任务的类型选择相应的 HealthCheckProcessor 实例进行处理，将具体的处理逻辑委托给对应的处理器
-
-
-# 其他技术点
-
-**同步锁**
-
-对修改服务列表的动作加锁处理，避免并发修改的安全问题
+Select the corresponding HealthCheckProcessor instance based on the type of task for processing, and delegate the specific processing logic to the corresponding processor
 
 
-**双重检查锁**
+# Other technical points
 
-保证线程安全，减少同步开销
+**synchronized**
 
-**copyOnWrite技术**
-
-在addIPAddress方法中，会拷贝旧的实例列表，添加新实例到列表中。完成对实例状态更新后，则会用新列表直接覆盖旧实例列表。而在更新过程中，旧实例列表不受影响，依然可以在处理心跳，判断健康状态时进行读取。
+Lock the action of modifying the service list to avoid security issues of concurrent modifications
 
 
+**Double-Checked Lock**
 
-# 下一步计划
+Ensure thread safety and reduce synchronization overhead
 
-health-server高可用，实现多实例部署，实现节点间数据同步
+**CopyOnWrite**
+
+In the addIPAddress method, the old instance list will be copied and a new instance will be added to the list. After updating the instance status, the old instance list will be directly overwritten with the new list. During the update process, the old instance list is not affected and can still be read while processing heartbeats and determining health status.
+
+
+
+# The next step
+
+Health server is highly available, enabling multi instance deployment and data synchronization between nodes
